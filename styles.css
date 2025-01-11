@@ -102,3 +102,71 @@ p {
 html {
     scroll-behavior: smooth;
 }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        padding: 4rem 2rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 1.25rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 3rem 1rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 1rem;
+    }
+
+    .btn-primary {
+        font-size: 0.9rem;
+    }
+
+    .space-y-6 > div {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Footer styling */
+footer {
+    background-color: #4B5563; /* Gray background */
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+}
+
+footer a {
+    color: #F3F4F6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

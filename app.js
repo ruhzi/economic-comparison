@@ -1,4 +1,5 @@
-document.getElementById('toggle-dark-mode').addEventListener('click', function() {
+// Toggle dark mode
+document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     // Change button text or icon on toggle
     if (document.body.classList.contains('dark-mode')) {
@@ -58,6 +59,9 @@ for (let year = 1960; year <= currentYear; year++) {
     endYearSelect.appendChild(endOption);
 }
 
+// Global chart instance
+let gdpChart = null;
+
 // Fetch GDP data for a country and date range
 function getGDPData() {
     const countryCode = document.getElementById('country').value;
@@ -89,7 +93,7 @@ function getGDPData() {
                     const year = item.date;
                     const growthRate = item.value ? item.value.toFixed(2) + '%' : 'No data';
                     const countryName = countryCodeToName[countryCode] || "Unknown";
-                    
+
                     // Display "Year - Growth Rate"
                     gdpHTML += `<tr><td>${year} - </td><td>${growthRate}</td></tr>`;
 
@@ -121,9 +125,14 @@ function getGDPData() {
 // Render the GDP chart using Chart.js
 function renderChart(years, growthRates) {
     const ctx = document.getElementById('gdp-chart').getContext('2d');
-    
-    // Create a chart using Chart.js
-    new Chart(ctx, {
+
+    // Destroy the previous chart (if any)
+    if (gdpChart) {
+        gdpChart.destroy();
+    }
+
+    // Create a new chart
+    gdpChart = new Chart(ctx, {
         type: 'line', // Line chart for GDP growth rates
         data: {
             labels: years, // X-axis: Years
@@ -154,7 +163,13 @@ function renderChart(years, growthRates) {
                         beginAtZero: false
                     }
                 }
-            }
-        }
-    });
+            },
+        },
+    },
+    )
 }
+
+// Event listeners for the country and date range selection
+document.getElementById('country').addEventListener('change', getGDPData);
+document.getElementById('start-year').addEventListener('change', getGDPData);
+document.getElementById('end-year').addEventListener('change', getGDPData);
