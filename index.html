@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDP Growth Rates</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Country GDP Growth Rate</h1>
+    
+    <label for="country">Country:</label>
+    <select id="country">
+        <option value="">Select a country</option> <!-- Placeholder option -->
+    </select>
+    
+    <label for="start-year">Start Year:</label>
+    <select id="start-year">
+        <!-- Options will be added dynamically via JS -->
+    </select>
+
+    <label for="end-year">End Year:</label>
+    <select id="end-year">
+        <!-- Options will be added dynamically via JS -->
+    </select>
+
+    <button onclick="getGDPData()">Get GDP Data</button>
+
+    <!-- GDP Data will be displayed in a table -->
+    <div id="gdp-data"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
