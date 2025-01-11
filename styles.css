@@ -1,66 +1,104 @@
-/* General page styling */
+/* Custom styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f9;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1rem; /* 16px */
+    transition: background-color 0.3s, color 0.3s;
 }
 
-h1 {
-    font-size: 2rem;
+/* Light theme */
+.bg-custom-light {
+    background-color: #F4F7FB; /* Light background */
     color: #333;
 }
 
-/* Styling for the input form */
-div {
-    margin-bottom: 10px;
+.card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-label {
-    font-weight: bold;
+/* Dark theme */
+body.dark-mode {
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0;
 }
 
-input {
-    padding: 5px;
-    margin-left: 10px;
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
-/* Centering the button and input fields */
-button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #4CAF50;
+body.dark-mode .btn-primary {
+    background-color: #6a5acd; /* Purple for dark mode */
+}
+
+body.dark-mode .btn-primary:hover {
+    background-color: #483d8b;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: #444;
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+    color: #fff;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #007BFF; /* Primary blue */
     color: white;
-    border: none;
-    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-button:hover {
-    background-color: #45a049;
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
-/* Table styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.btn-primary:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.btn-secondary {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-th, td {
-    padding: 10px;
-    text-align: center;
+.btn-secondary:hover {
+    background-color: #e0e0e0;
 }
 
-th {
-    background-color: #f2f2f2;
+.btn-secondary:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
 }
 
-/* Responsiveness for smaller screens */
-@media (max-width: 600px) {
-    input, button {
-        width: 100%;
-    }
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography styles */
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
 }

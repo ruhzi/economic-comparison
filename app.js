@@ -1,4 +1,14 @@
-// Store country code to name mapping
+document.getElementById('toggle-dark-mode').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    // Change button text or icon on toggle
+    if (document.body.classList.contains('dark-mode')) {
+        this.innerHTML = '🌞'; // Switch to light mode icon
+    } else {
+        this.innerHTML = '🌙'; // Switch to dark mode icon
+    }
+});
+
+// Store country code to name mapping 
 let countryCodeToName = {};
 
 // Fetch the country codes and names from the Restcountries API
@@ -7,14 +17,10 @@ fetch('https://restcountries.com/v3.1/all')
     .then(data => {
         // Sort the countries alphabetically by name
         data.sort((a, b) => {
-            const nameA = a.name.common.toUpperCase(); // Ignore case
-            const nameB = b.name.common.toUpperCase(); // Ignore case
-            if (nameA < nameB) {
-                return -1;
-            }
-            if (nameA > nameB) {
-                return 1;
-            }
+            const nameA = a.name.common.toUpperCase();
+            const nameB = b.name.common.toUpperCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
             return 0;
         });
 
@@ -22,8 +28,8 @@ fetch('https://restcountries.com/v3.1/all')
         const countrySelect = document.getElementById('country');
         data.forEach(country => {
             const option = document.createElement('option');
-            option.value = country.cca2;  // Store the country code as value
-            option.textContent = country.name.common;  // Display the country name
+            option.value = country.cca2;
+            option.textContent = country.name.common;
             countrySelect.appendChild(option);
         });
 
@@ -40,7 +46,6 @@ const startYearSelect = document.getElementById('start-year');
 const endYearSelect = document.getElementById('end-year');
 const currentYear = new Date().getFullYear();
 
-// Populate the year dropdowns with years from 1960 to the current year
 for (let year = 1960; year <= currentYear; year++) {
     const startOption = document.createElement('option');
     startOption.value = year;
@@ -55,7 +60,7 @@ for (let year = 1960; year <= currentYear; year++) {
 
 // Fetch GDP data for a country and date range
 function getGDPData() {
-    const countryCode = document.getElementById('country').value;  // Get selected country code
+    const countryCode = document.getElementById('country').value;
     const startYear = document.getElementById('start-year').value;
     const endYear = document.getElementById('end-year').value;
 
@@ -73,40 +78,83 @@ function getGDPData() {
             let gdpHTML = '<h3>GDP Growth Data</h3>';
             let totalGrowthRate = 0;
             let count = 0;
+            let years = [];
+            let growthRates = [];
 
-            // Check if data exists for the selected country
             if (!gdpData || gdpData.length === 0) {
                 gdpHTML += '<p>No data found for this country and period.</p>';
             } else {
-                // Create a table to display GDP data
                 gdpHTML += `<table><thead><tr><th>Year</th><th>GDP Growth Rate (%)</th></tr></thead><tbody>`;
-
-                // Loop through the data and display the results in table rows
                 gdpData.forEach(item => {
                     const year = item.date;
-                    const growthRate = item.value ? item.value.toFixed(2) : 'No data';
+                    const growthRate = item.value ? item.value.toFixed(2) + '%' : 'No data';
                     const countryName = countryCodeToName[countryCode] || "Unknown";
+                    
+                    // Display "Year - Growth Rate"
+                    gdpHTML += `<tr><td>${year} - </td><td>${growthRate}</td></tr>`;
 
-                    gdpHTML += `<tr><td>${year}</td><td>${growthRate}</td></tr>`;
-
-                    // Accumulate the growth rate for average calculation
                     if (item.value) {
                         totalGrowthRate += item.value;
                         count++;
+                        years.push(year);
+                        growthRates.push(item.value);
                     }
                 });
 
                 gdpHTML += '</tbody></table>';
 
-                // Calculate the average GDP growth rate
                 if (count > 0) {
                     const averageGrowthRate = (totalGrowthRate / count).toFixed(2);
                     gdpHTML += `<p><strong>Average GDP Growth Rate:</strong> ${averageGrowthRate}%</p>`;
                 } else {
                     gdpHTML += '<p><strong>Average GDP Growth Rate:</strong> No data available.</p>';
                 }
+
+                // Render the chart
+                renderChart(years, growthRates);
             }
             document.getElementById('gdp-data').innerHTML = gdpHTML;
         })
         .catch(error => console.error('Error fetching GDP data:', error));
+}
+
+// Render the GDP chart using Chart.js
+function renderChart(years, growthRates) {
+    const ctx = document.getElementById('gdp-chart').getContext('2d');
+    
+    // Create a chart using Chart.js
+    new Chart(ctx, {
+        type: 'line', // Line chart for GDP growth rates
+        data: {
+            labels: years, // X-axis: Years
+            datasets: [{
+                label: 'GDP Growth Rate (%)',
+                data: growthRates, // Y-axis: GDP growth rates
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true, // Fill the area under the line
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'GDP Growth Rate (%)'
+                    },
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        }
+    });
 }
