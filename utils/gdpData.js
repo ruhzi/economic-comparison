@@ -104,10 +104,33 @@ export async function getGDPData() {
     }
 }
 
-function getRandomColor() {
+function createColorPicker() {
     const colors = [
         '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-        '#FF9F40', '#FF6384', '#C9CBCF', '#4BC0C0', '#36A2EB'
+        '#FF9F40', '#C9CBCF'
     ];
-    return colors[Math.floor(Math.random() * colors.length)];
+    const usedColors = new Set();
+
+    return function getRandomColor() {
+        // Get available colors by filtering out used ones
+        const availableColors = colors.filter(color => !usedColors.has(color));
+
+        // If no colors are available, reset the used colors and start over
+        if (availableColors.length === 0) {
+            usedColors.clear();
+            availableColors.push(...colors);
+        }
+
+        // Choose a random color from available colors
+        const color = availableColors[Math.floor(Math.random() * availableColors.length)];
+
+        // Mark the selected color as used
+        usedColors.add(color);
+
+        return color;
+    };
 }
+
+// Usage
+const getRandomColor = createColorPicker();
+console.log(getRandomColor()); // Each call will avoid previously chosen colors until all are used
