@@ -5,28 +5,74 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Light theme */
+/* Light theme - Option 1: Soft Professional */
 .bg-custom-light {
-    background-color: #F4F7FB; /* Light background */
+    background-color: #F4F7FB;
+    background-image: 
+        radial-gradient(at 40% 20%, rgba(79, 70, 229, 0.03) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.03) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.03) 0px, transparent 50%);
     color: #333;
+}
+
+/* Light theme - Option 2: Modern Mint */
+.bg-custom-light {
+    background-color: #f8fafc;
+    background-image: 
+        radial-gradient(at 30% 20%, rgba(16, 185, 129, 0.03) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.02) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(139, 92, 246, 0.03) 0px, transparent 50%);
+}
+
+/* Light theme - Option 3: Warm Sunrise */
+.bg-custom-light {
+    background-color: #fefefe;
+    background-image: 
+        radial-gradient(at 20% 0%, rgba(251, 146, 60, 0.03) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, rgba(249, 115, 22, 0.02) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.03) 0px, transparent 50%);
 }
 
 .card {
     background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Softer, more modern shadow */
+    border-radius: 16px; /* Slightly more rounded corners */
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.3s ease;
 }
 
-/* Dark theme */
+/* Dark theme - Option 1: Deep Space */
 body.dark-mode {
-    background-color: #121212; /* Dark background */
+    background-color: #111827;
+    background-image: 
+        radial-gradient(at 40% 20%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
     color: #e0e0e0;
 }
 
+/* Dark theme - Option 2: Northern Lights */
+body.dark-mode {
+    background-color: #0f172a;
+    background-image: 
+        radial-gradient(at 30% 20%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(34, 197, 94, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+}
+
+/* Dark theme - Option 3: Midnight Ocean */
+body.dark-mode {
+    background-color: #0f172a;
+    background-image: 
+        radial-gradient(at 40% 20%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(14, 165, 233, 0.12) 0px, transparent 50%);
+}
+
 body.dark-mode .card {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    background-color: #1F2937;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .btn-primary {
@@ -52,14 +98,14 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
 
 /* Button styles */
 .btn-primary {
-    background-color: #007BFF; /* Primary blue */
-    color: white;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    background-color: #4F46E5; /* More modern indigo color */
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #4338CA;
+    transform: translateY(-1px);
 }
 
 .btn-primary:focus {
@@ -68,10 +114,9 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
 }
 
 .btn-secondary {
-    background-color: #f0f0f0;
-    color: #333;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    background-color: #f3f4f6;
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-secondary:hover {
@@ -169,4 +214,47 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+/* Select element styling */
+select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+select:hover {
+    border-color: #4F46E5;
+}
+
+/* Table styling */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+td:nth-child(2) {
+    text-align: right;
+}
+
+th:nth-child(2) {
+    text-align: right;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+body.dark-mode th {
+    background-color: #374151;
+}
+
+body.dark-mode td, body.dark-mode th {
+    border-bottom: 1px solid #374151;
 }
