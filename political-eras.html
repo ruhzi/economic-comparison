@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Era GDP Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-custom-light text-gray-800">
+    <nav class="bg-white shadow-lg dark:bg-gray-800">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-semibold">
+                    <a href="index.html" class="text-gray-800 dark:text-white hover:text-gray-600">
+                        GDP Analysis
+                    </a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="index.html" class="text-gray-800 dark:text-white hover:text-gray-600">Home</a>
+                    <a href="political-eras.html" class="text-gray-800 dark:text-white hover:text-gray-600">Political Eras</a>
+                </div>
+                <button id="toggle-dark-mode" class="btn-secondary p-2 rounded-full focus:outline-none">
+                    🌙
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6 sm:p-8 lg:p-12 max-w-full sm:max-w-4xl bg-white rounded-lg shadow-lg card mt-8">
+        <h1 class="text-2xl sm:text-3xl font-semibold mb-6">GDP Growth by Political Era</h1>
+        
+        <!-- Country Selection -->
+        <div class="mb-6">
+            <label class="block text-lg font-semibold text-gray-700 mb-2">Select Country</label>
+            <select id="country-select" class="country-select w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-700">
+                <option value="">Choose a country</option>
+            </select>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" class="hidden">
+            <p class="text-gray-600">Loading data...</p>
+        </div>
+
+        <!-- Political Eras Data -->
+        <div id="political-eras" class="mt-8 space-y-4"></div>
+
+        <!-- GDP Chart with fixed height -->
+        <div id="chart-container" class="mt-8" style="height: 400px; position: relative;">
+            <canvas id="gdp-chart"></canvas>
+        </div>
+    </div>
+
+    <script type="module" src="political-eras.js"></script>
+</body>
+</html> 
