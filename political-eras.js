@@ -108,9 +108,24 @@ window.fetchGDPDataForEra = async function(countryCode, startYear, endYear) {
     try {
         const chartContainer = document.getElementById('chart-container');
         
-        // Clear previous chart and show loading
+        // Clear any existing chart first
+        if (window.currentChart) {
+            window.currentChart.destroy();
+            window.currentChart = null;
+        }
+
+        // If data is requested from before 1960, show warning and don't create chart
+        if (startYear < 1960) {
+            chartContainer.innerHTML = `
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
+                    <p>Note: World Bank data is only available from 1960 onwards. Please select a more recent time period.</p>
+                </div>
+            `;
+            return; // Exit early - don't try to fetch data
+        }
+        
+        // If we're continuing with valid years, set up the chart canvas
         chartContainer.innerHTML = `
-            <p class="text-gray-600 mb-4">Loading GDP data...</p>
             <canvas id="gdp-chart" style="height: 100%; width: 100%;"></canvas>
         `;
         
