@@ -1,4 +1,3 @@
-// app.js
 import { setDarkMode, toggleDarkMode } from './utils/darkMode.js';
 import { fetchCountryData, populateCountrySelect } from './utils/countryData.js';
 import { populateYearDropdowns } from './utils/yearSelection.js';
@@ -9,17 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchCountryData();
     populateYearDropdowns();
 
-    // Dark mode toggle
     document.getElementById('toggle-dark-mode').addEventListener('click', toggleDarkMode);
-
-    // Add country button
     document.getElementById('add-country').addEventListener('click', addCountrySelect);
 
-    // Initial country select setup
     const initialGroup = document.querySelector('.country-select-group');
     setupCountrySelect(initialGroup);
 
-    // Add change event listeners for year dropdowns
     document.getElementById('start-year').addEventListener('change', getGDPData);
     document.getElementById('end-year').addEventListener('change', getGDPData);
 });
@@ -27,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function addCountrySelect() {
     const container = document.getElementById('country-container');
     const countryGroups = container.querySelectorAll('.country-select-group');
-    
+
     if (countryGroups.length >= 5) {
         alert('Maximum 5 countries can be compared at once');
         return;
@@ -43,14 +37,12 @@ function addCountrySelect() {
     `;
 
     container.appendChild(newGroup);
-    
-    // Populate the new select with countries
+
     const newSelect = newGroup.querySelector('.country-select');
     populateCountrySelect(newSelect);
-    
+
     setupCountrySelect(newGroup);
 
-    // Show remove button for all groups if more than one
     document.querySelectorAll('.remove-country').forEach(btn => {
         btn.style.display = 'block';
     });
@@ -60,9 +52,7 @@ function setupCountrySelect(groupElement) {
     const select = groupElement.querySelector('.country-select');
     const removeBtn = groupElement.querySelector('.remove-country');
 
-    // Remove any existing event listeners
     select.removeEventListener('change', getGDPData);
-    // Add new event listener
     select.addEventListener('change', () => {
         if (select.value) {
             getGDPData();
