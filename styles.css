@@ -1,11 +1,9 @@
-/* Custom styles */
 body {
     font-family: 'Helvetica', sans-serif;
-    font-size: 1rem; /* 16px */
+    font-size: 1rem;
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Light theme - Option 1: Soft Professional */
 .bg-custom-light {
     background-color: #F4F7FB;
     background-image: 
@@ -15,28 +13,10 @@ body {
     color: #333;
 }
 
-/* Light theme - Option 2: Modern Mint */
-.bg-custom-light {
-    background-color: #f8fafc;
-    background-image: 
-        radial-gradient(at 30% 20%, rgba(16, 185, 129, 0.03) 0px, transparent 50%),
-        radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.02) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, rgba(139, 92, 246, 0.03) 0px, transparent 50%);
-}
-
-/* Light theme - Option 3: Warm Sunrise */
-.bg-custom-light {
-    background-color: #fefefe;
-    background-image: 
-        radial-gradient(at 20% 0%, rgba(251, 146, 60, 0.05) 0px, transparent 50%),
-        radial-gradient(at 90% 10%, rgba(249, 115, 22, 0.04) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.05) 0px, transparent 50%);
-}
-
 .card {
     background-color: #ffffff;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Softer, more modern shadow */
-    border-radius: 16px; /* Slightly more rounded corners */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
                 box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
                 background-color 0.3s ease;
@@ -67,7 +47,6 @@ body {
     transform: translateX(100%);
 }
 
-/* Dark theme - Option 1: Deep Space */
 body.dark-mode {
     background-color: #111827;
     background-image: 
@@ -77,31 +56,13 @@ body.dark-mode {
     color: #e0e0e0;
 }
 
-/* Dark theme - Option 2: Northern Lights */
-body.dark-mode {
-    background-color: #0f172a;
-    background-image: 
-        radial-gradient(at 30% 20%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-        radial-gradient(at 80% 0%, rgba(34, 197, 94, 0.15) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
-}
-
-/* Dark theme - Option 3: Midnight Ocean */
-body.dark-mode {
-    background-color: #0f172a;
-    background-image: 
-        radial-gradient(at 40% 20%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
-        radial-gradient(at 90% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, rgba(14, 165, 233, 0.12) 0px, transparent 50%);
-}
-
 body.dark-mode .card {
     background-color: rgba(31, 41, 55, 0.8);
     backdrop-filter: blur(12px);
 }
 
 body.dark-mode .btn-primary {
-    background-color: #6a5acd; /* Purple for dark mode */
+    background-color: #6a5acd;
 }
 
 body.dark-mode .btn-primary:hover {
@@ -121,7 +82,6 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
     color: #fff;
 }
 
-/* Button styles */
 .btn-primary {
     background-color: #4F46E5;
     box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
@@ -178,7 +138,6 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
     left: 100%;
 }
 
-/* Card hover effect */
 .card:hover {
     transform: translateY(-4px);
     box-shadow: 
@@ -186,7 +145,6 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
         0 4px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* Typography styles */
 h1, h2, h3 {
     font-weight: 700;
     background: linear-gradient(120deg, #2563eb 0%, #4f46e5 100%);
@@ -199,12 +157,10 @@ p {
     line-height: 1.6;
 }
 
-/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .container {
         padding: 4rem 2rem;
@@ -253,7 +209,6 @@ html {
     }
 }
 
-/* Footer styling */
 footer {
     background: linear-gradient(to right, #4B5563, #374151);
     border-radius: 8px;
@@ -286,7 +241,6 @@ footer a:hover::after {
     transform: scaleX(1);
 }
 
-/* Select element styling */
 select {
     transition: all 0.2s ease;
     background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
@@ -302,7 +256,6 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
 
-/* Table styling */
 table {
     border-collapse: separate;
     border-spacing: 0;
@@ -343,7 +296,6 @@ tr:hover td {
     background-color: rgba(249, 250, 251, 0.04);
 }
 
-/* Smooth focus rings */
 :focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3),
