@@ -35,11 +35,11 @@ export async function getGDPData() {
             `<h3>GDP Growth Data for ${countryData[0].countryName}</h3>`;
 
         const chartData = {
-            years: new Set(), // Using Set to collect unique years
+            years: new Set(), 
             datasets: []
         };
 
-        // Create a table for each country
+        
         countryData.forEach(({ countryCode, countryName, data }) => {
             let totalGrowthRate = 0;
             let count = 0;
@@ -54,7 +54,7 @@ export async function getGDPData() {
                 <thead><tr><th>Year</th><th>GDP Growth Rate (%)</th></tr></thead>
                 <tbody>`;
 
-            // Sort data by year in descending order
+            
             data.sort((a, b) => b.date - a.date);
 
             data.forEach(item => {
@@ -68,7 +68,7 @@ export async function getGDPData() {
                     count++;
                     years.push(year);
                     countryGrowthRates.push(item.value);
-                    chartData.years.add(year); // Add to unique years set
+                    chartData.years.add(year); 
                 }
             });
 
@@ -79,7 +79,7 @@ export async function getGDPData() {
                 gdpHTML += `<p><strong>Average GDP Growth Rate:</strong> ${averageGrowthRate}%</p>`;
             }
 
-            // Add dataset for this country
+           
             chartData.datasets.push({
                 label: countryName,
                 data: countryGrowthRates,
@@ -91,7 +91,7 @@ export async function getGDPData() {
 
         document.getElementById('gdp-data').innerHTML = gdpHTML;
 
-        // Convert years Set to sorted array and prepare final chart data
+        
         const sortedYears = Array.from(chartData.years).sort();
         renderChart({
             years: sortedYears,
@@ -112,25 +112,23 @@ function createColorPicker() {
     const usedColors = new Set();
 
     return function getRandomColor() {
-        // Get available colors by filtering out used ones
+        
         const availableColors = colors.filter(color => !usedColors.has(color));
 
-        // If no colors are available, reset the used colors and start over
+        
         if (availableColors.length === 0) {
             usedColors.clear();
             availableColors.push(...colors);
         }
 
-        // Choose a random color from available colors
+        
         const color = availableColors[Math.floor(Math.random() * availableColors.length)];
 
-        // Mark the selected color as used
         usedColors.add(color);
 
         return color;
     };
 }
 
-// Usage
 const getRandomColor = createColorPicker();
-console.log(getRandomColor()); // Each call will avoid previously chosen colors until all are used
+console.log(getRandomColor()); 
