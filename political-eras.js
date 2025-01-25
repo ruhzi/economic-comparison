@@ -4,13 +4,8 @@ import { renderChart } from './utils/chart.js';
 import { setDarkMode, toggleDarkMode } from './utils/darkMode.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize dark mode
     setDarkMode();
-    
-    // Initialize country selection
     fetchCountryData();
-
-    // Set up event listeners
     document.getElementById('toggle-dark-mode').addEventListener('click', toggleDarkMode);
     document.getElementById('country-select').addEventListener('change', handleCountrySelection);
 });
@@ -20,40 +15,26 @@ async function handleCountrySelection(event) {
     if (!countryCode) return;
 
     try {
-        // Clear previous chart if it exists
         if (window.currentChart) {
             window.currentChart.destroy();
             window.currentChart = null;
         }
-        
-        // Reset chart container to initial state with fixed height
+
         const chartContainer = document.getElementById('chart-container');
         chartContainer.innerHTML = `
             <div class="text-center text-gray-500 h-full flex items-center justify-center">
                 <p>Select a political leader to view GDP data</p>
             </div>
         `;
-        
-        // Show loading state for political data
+
         const politicalErasDiv = document.getElementById('political-eras');
         politicalErasDiv.innerHTML = '<p class="text-gray-600">Loading political data...</p>';
 
-        // Debug logs
-        console.log('Selected country code:', countryCode);
-        
-        // Fetch political leaders data
         const leaders = await fetchPoliticalLeaders(countryCode);
-        console.log('Fetched leaders:', leaders);
-        
-        // Display political eras
         displayPoliticalEras(leaders, countryCode);
-
     } catch (error) {
-        console.error('Detailed error in handleCountrySelection:', error);
         document.getElementById('political-eras').innerHTML = 
             `<p class="text-red-500">Error loading political data: ${error.message}</p>`;
-        
-        // Reset chart container on error
         document.getElementById('chart-container').innerHTML = `
             <div class="text-center text-gray-500 h-full flex items-center justify-center">
                 <p>Select a political leader to view GDP data</p>
@@ -72,9 +53,8 @@ function displayPoliticalEras(leaders, countryCode) {
 
     let html = '<div class="space-y-4">';
     
-    leaders.forEach((leader, index) => {
+    leaders.forEach((leader) => {
         const isActive = !leader.endDate || leader.endDate === new Date().getFullYear();
-        
         html += `
             <div class="p-4 border rounded-lg hover:shadow-md transition-shadow ${
                 isActive ? 'border-blue-500' : 'border-gray-200'
@@ -103,28 +83,24 @@ function displayPoliticalEras(leaders, countryCode) {
     politicalErasDiv.innerHTML = html;
 }
 
-// Make this function available globally
 window.fetchGDPDataForEra = async function(countryCode, startYear, endYear) {
     try {
         const chartContainer = document.getElementById('chart-container');
         
-        // Clear any existing chart first
         if (window.currentChart) {
             window.currentChart.destroy();
             window.currentChart = null;
         }
 
-        // If data is requested from before 1960, show warning and don't create chart
         if (startYear < 1960) {
             chartContainer.innerHTML = `
                 <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
                     <p>Note: World Bank data is only available from 1960 onwards. Please select a more recent time period.</p>
                 </div>
             `;
-            return; // Exit early - don't try to fetch data
+            return;
         }
         
-        // If we're continuing with valid years, set up the chart canvas
         chartContainer.innerHTML = `
             <canvas id="gdp-chart" style="height: 100%; width: 100%;"></canvas>
         `;
@@ -139,25 +115,20 @@ window.fetchGDPDataForEra = async function(countryCode, startYear, endYear) {
 
         updateChart(data[1], startYear, endYear);
 
-        // Scroll to chart with offset
         window.scrollTo({
             top: chartContainer.offsetTop - 100,
             behavior: 'smooth'
         });
-
     } catch (error) {
-        console.error('Error fetching GDP data:', error);
         document.getElementById('chart-container').innerHTML = 
             `<p class="text-red-500">Error loading GDP data: ${error.message}</p>`;
     }
 };
 
 function updateChart(gdpData, startYear, endYear) {
-    // Get the canvas context
     const canvas = document.getElementById('gdp-chart');
     const ctx = canvas.getContext('2d');
     
-    // Clear any existing chart
     if (window.currentChart) {
         window.currentChart.destroy();
     }
@@ -172,7 +143,6 @@ function updateChart(gdpData, startYear, endYear) {
         }
     });
 
-    // Create new chart with fixed dimensions
     window.currentChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -214,4 +184,4 @@ function updateChart(gdpData, startYear, endYear) {
             }
         }
     });
-} 
+}
