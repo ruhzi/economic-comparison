@@ -1,4 +1,3 @@
-// chart.js
 let gdpChart = null;
 
 export function renderChart(chartData) {
@@ -8,7 +7,6 @@ export function renderChart(chartData) {
         gdpChart.destroy();
     }
 
-    // Only create chart if we have data
     if (chartData.years.length > 0 && chartData.datasets.length > 0) {
         gdpChart = new Chart(ctx, {
             type: 'line',
@@ -57,7 +55,6 @@ export function renderChart(chartData) {
     }
 }
 
-// Add function to clear chart if needed
 export function clearChart() {
     if (gdpChart) {
         gdpChart.destroy();
