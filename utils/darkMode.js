@@ -4,10 +4,10 @@ export function setDarkMode() {
     
     if (isDarkMode) {
         document.body.classList.add('dark-mode');
-        document.getElementById('toggle-dark-mode').innerHTML = '🌞'; // Switch to light mode icon
+        document.getElementById('toggle-dark-mode').innerHTML = '🌞'; 
     } else {
         document.body.classList.remove('dark-mode');
-        document.getElementById('toggle-dark-mode').innerHTML = '🌙'; // Switch to dark mode icon
+        document.getElementById('toggle-dark-mode').innerHTML = '🌙'; 
     }
 }
 
@@ -17,5 +17,5 @@ export function toggleDarkMode() {
     localStorage.setItem('dark-mode', isDarkMode);
 
     const button = document.getElementById('toggle-dark-mode');
-    button.innerHTML = isDarkMode ? '🌞' : '🌙'; // Update button text/icon
+    button.innerHTML = isDarkMode ? '🌞' : '🌙'; 
 }
